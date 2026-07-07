@@ -1,5 +1,6 @@
 import ollama
 
+
 from config import (
     OLLAMA_MODEL,
     OLLAMA_BASE_URL
