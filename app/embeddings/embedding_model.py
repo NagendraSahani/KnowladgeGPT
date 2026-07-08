@@ -1,26 +1,23 @@
-import ollama 
-from config import OLLAMA_BASE_URL
+from sentence_transformers import SentenceTransformer
+
 
 class EmbeddingModel:
+
     def __init__(self):
-        self.client=ollama.Client(host=OLLAMA_BASE_URL)
-        self.model="nomic-embed-text:latest"
-
-    def embed_documents(self,texts):
-        embeddings = []
-
-        for text in texts:
-            response = self.client.embed(
-                model=self.model,
-                input=text
-            )
-            embeddings.append(response["embeddings"][0])
-        return embeddings
-
-    def embed_query(self,query):
-        response =self.client.embed(
-            model = self.model,
-            input=query
+        self.model = SentenceTransformer(
+            "sentence-transformers/all-MiniLM-L6-v2"
         )
 
-        return response["embeddings"][0]
+    def embed_documents(self, documents):
+
+        return self.model.encode(
+            documents,
+            convert_to_numpy=True
+        ).tolist()
+
+    def embed_query(self, query):
+
+        return self.model.encode(
+            query,
+            convert_to_numpy=True
+        ).tolist()
