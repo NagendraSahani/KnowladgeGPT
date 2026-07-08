@@ -1,5 +1,5 @@
 from services.document_service import DocumentService
-from llm.ollama_client import ask_llm
+from llm.llm_factory import ask_llm
 
 
 class SummaryChain:

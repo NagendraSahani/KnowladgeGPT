@@ -1,5 +1,5 @@
 from retriever.retriever import Retriever
-from llm.ollama_client import ask_llm
+from llm.llm_factory import ask_llm
 
 
 class RAGChain:
